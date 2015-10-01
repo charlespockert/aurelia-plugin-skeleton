@@ -20,9 +20,32 @@ Browse to http://localhost:3000 to see the plugin working
 
 The configuration works off the `package.json` file - it uses the package name to setup paths for BrowserSync and SystemJS.
 
-All you need to do to rename your plugin is open `package.json` and change the name.
+All you need to do to rename your plugin is open `package.json` and change the plugin name:
 
-Once you've done this, make sure to change the plugin import in the `main.js` file under the sample directory to ensure aurelia tries to load the plugin by the new name
+```Javascript
+{
+  "name": "aurelia-plugin-skeleton", // <-- Change this
+  "version": "0.0.1",
+  "description": "A plugin skeleton repo plus self hosted sample app.",
+  "keywords": [
+    "aurelia",
+    "plugin",
+    "skeleton"
+  ],
+```
+
+Once you've done this, make sure to change the plugin import in the `main.js` file under the `sample/src` directory to ensure aurelia tries to load the plugin by the new name:
+
+```
+export function configure(aurelia) {
+  aurelia.use
+    .standardConfiguration()
+    .developmentLogging()
+    .plugin('aurelia-plugin-skeleton'); // <-- Change this
+
+  aurelia.start().then(a => a.setRoot('app'));
+}
+```
 
 ## Creating your plugin
 
